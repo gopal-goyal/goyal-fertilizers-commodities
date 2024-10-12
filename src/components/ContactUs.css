@@ -1,0 +1,13 @@
+/* Styles for contact items (icon and text alignment) */
+.contact-item {
+    display: flex;
+    margin-bottom: 1em;
+  }
+  
+  /* Styles for QR code */
+  .qr-code {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+  }
+  

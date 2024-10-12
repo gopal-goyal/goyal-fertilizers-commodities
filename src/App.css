@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Top Secret';
+  src: url('./fonts/Top Secret.woff') format('woff'); /* Adjust the path as necessary */
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +43,5 @@
     transform: rotate(360deg);
   }
 }
+
+

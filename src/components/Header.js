@@ -1,20 +1,28 @@
-
-import React from 'react';
-import { FaLeaf } from 'react-icons/fa'; 
+import React, { useState } from 'react';
+import { FaLeaf, FaBars } from 'react-icons/fa';
 import 'animate.css';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header style={headerStyle} className="animate__animated animate__fadeInDown">
-      <div style={logoContainerStyle}>
-        <FaLeaf style={iconStyle} />
-        <img src="Logo_GF.webp" alt="Goyal Fertilizers and Commodities" style={logoStyle} />
+
+      <div>
+        <img src="gfc_logo.png" alt="Goyal Fertilizers and Commodities" style={logoStyle} />
       </div>
-      <nav>
-        <button style={buttonStyle} onClick={() => scrollToSection('about-us')}>About Us</button>
-        <button style={buttonStyle} onClick={() => scrollToSection('products')}>Products</button>
-        <button style={buttonStyle} onClick={() => scrollToSection('contact-us')}>Contact Us</button>
-      </nav>
+        <div style={navbar}>
+          <nav style={navStyle}>
+            <button style={buttonStyle} onClick={() => scrollToSection('about-us')}>About Us</button>
+            <button style={buttonStyle} onClick={() => scrollToSection('products')}>Products</button>
+            <button style={buttonStyle} onClick={() => scrollToSection('contact-us')}>Contact Us</button>
+          </nav>
+
+          </div>
     </header>
   );
 };
@@ -24,31 +32,38 @@ const scrollToSection = (id) => {
 };
 
 const headerStyle = {
-  textAlign: 'center',
-  padding: '20px',
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '10px 20px',
   background: '#f0f0f0',
+  position: 'relative',
 };
 
-const logoContainerStyle = {
+const navbar = {
   display: 'flex',
-  alignItems: 'center',
   justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  padding: '10px 0',
+};
+
+const navStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '20px',
 };
 
 const logoStyle = {
-  width: '150px',
+  width: '120px',
   height: 'auto',
   marginLeft: '10px',
 };
 
-const iconStyle = {
-  color: 'green',
-  fontSize: '2rem',
-};
-
 const buttonStyle = {
-  margin: '10px',
-  padding: '10px 20px',
+  padding: '8px 16px',
   backgroundColor: '#4CAF50',
   color: '#fff',
   border: 'none',
