@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+}
+
+.back-arrow a {
+  text-decoration: none;
+  color: #095a55;
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow a:hover {
+  color: #0d9480;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #095a55;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: #fff38e;
+}
+
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 600px;
+  display: flex;
+  z-index: 1000;
+  border-radius: 22px;
+  background-color: #fff;
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.container .contactForm {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container .contactForm h2 {
+  color: #0f3959;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container .contactForm .formBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.container .contactForm .formBox .inputBox {
+  position: relative;
+  width: 100%;
+}
+
+.container .contactForm .formBox .inputBox.w50 {
+  width: 48%;
+}
+
+.container .contactForm .formBox .inputBox.w100 {
+  width: 100%;
+}
+
+.container .contactForm .formBox .inputBox input,
+.container .contactForm .formBox .inputBox textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.container .contactForm .formBox .inputBox textarea {
+  height: 120px;
+  resize: none;
+}
+
+.container .contactForm .formBox .inputBox span {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #777;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.container .contactForm .formBox .inputBox input:focus ~ span,
+.container .contactForm .formBox .inputBox input:valid ~ span,
+.container .contactForm .formBox .inputBox textarea:focus ~ span,
+.container .contactForm .formBox .inputBox textarea:valid ~ span {
+  top: -10px;
+  font-size: 12px;
+  color: #095a55;
+}
+
+/* Styling the send button */
+.container .contactForm .formBox .inputBox button {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #095a55 50%, #fff38e 50%);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container .contactForm .formBox .inputBox button:hover {
+  background: linear-gradient(to right, #0d9480 50%, #fff38e 50%);
+  transform: scale(1.05);
+}
+
+/* Centering the text horizontally and vertically */
+.container .contactForm .formBox .inputBox button span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.container .contactForm .formBox .inputBox button .left-text {
+  left: 42%;  /* Adjust this value to move 'SE' towards the center of the left half */
+  color: white;
+}
+
+.container .contactForm .formBox .inputBox button .right-text {
+  right: 50%;  /* Adjust this value to move 'ND' towards the center of the right half */
+  color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .container {
+    flex-direction: column;
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .container .contactForm {
+    width: 100%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container .contactForm {
+    padding: 20px;
+  }
+
+  .container .contactForm .formBox .inputBox.w50 {
+    width: 100%;
+  }
+}

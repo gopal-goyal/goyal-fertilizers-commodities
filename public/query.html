@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Responsive Page Design</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
+    </style>
+    <link rel="stylesheet" href="./stylesheets/query.css" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="back-arrow">
+          <a href="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 1-.5.5H3.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div class="contactForm">
+          <h2>Send a Message</h2>
+          <div class="formBox">
+            <div class="inputBox w50">
+              <input type="text" id="firstName" name="firstName" required />
+              <span>First Name</span>
+            </div>
+            <div class="inputBox w50">
+              <input type="text" id="lastName" name="lastName" required />
+              <span>Last Name</span>
+            </div>
+            <div class="inputBox w50">
+              <input type="email" id="email" name="email" required />
+              <span>Email Address</span>
+            </div>
+            <div class="inputBox w50">
+              <input type="text" id="mobile" name="mobile" required />
+              <span>Mobile Number</span>
+            </div>
+            <div class="inputBox w100">
+              <textarea id="message" name="message" required></textarea>
+              <span>Write your query here...</span>
+            </div>
+            <div class="inputBox w100">
+              <button type="button" onclick="submitQuery()">
+                <span class="left-text">SE</span
+                ><span class="right-text">ND</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      async function submitQuery() {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const email = document.getElementById("email").value;
+        const mobile = document.getElementById("mobile").value;
+        const message = document.getElementById("message").value;
+
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/submit-query",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                firstName,
+                lastName,
+                email,
+                mobile,
+                message,
+              }),
+            }
+          );
+
+          console.log(response);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          alert(data.message);
+        } catch (error) {
+          console.error("Error in fetch request:", error);
+          alert("There was a problem submitting your query.");
+        }
+      }
+    </script>
+  </body>
+</html>

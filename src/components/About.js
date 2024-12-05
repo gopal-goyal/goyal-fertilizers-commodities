@@ -1,59 +1,108 @@
-import React from 'react';
-import 'animate.css';
+import React, { useEffect, useRef } from "react";
+import "animate.css";
 
 const AboutUs = () => {
+  const wordsRef = useRef([]); // References to all individual words
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      wordsRef.current.forEach((word) => {
+        if (word) {
+          const rect = word.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const progress = Math.min(
+              Math.max(rect.top / window.innerHeight, 0),
+              1
+            );
+            const color = progress > 0.55 ? "#ffffff" : "#000000";
+            word.style.color = color;
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const paragraphs = [
+    "Established in 1984 by Shri Mahaveer Prashad Goyal, our company has been a vital part of Sri Ganganagar's agricultural community.",
+    "Now managed by Anil, Ajay, and Vipin Goyal, we provide high-quality seeds, fertilizers, and pesticides to boost productivity.",
+  ];
+
+  const renderParagraphs = () =>
+    paragraphs.map((text, paraIndex) => (
+      <p key={paraIndex} style={paragraphStyle}>
+        {text.split(" ").map((word, wordIndex) => (
+          <span
+            key={`${paraIndex}-${wordIndex}`}
+            ref={(el) => (wordsRef.current[paraIndex * 100 + wordIndex] = el)}
+            style={wordStyle}
+          >
+            {word}&nbsp;
+          </span>
+        ))}
+      </p>
+    ));
+
   return (
-    <section id="about-us" style={sectionStyle} className="animate__animated animate__fadeInLeft">
-      <h2 style={headingStyle}>About Us</h2>
-      <div style={contentStyle}>
-        <p style={{ ...paragraphStyle, color: '#FFFFFF' }}>
-          • Founded in 1984 by Shri Mahaveer Prashad Goyal.<br />
-          • Supporting agriculture in Sri Ganganagar.<br />
-          • Managed by Anil, Ajay, and Vipin Goyal.
-        </p>
-        
-        <p style={{ ...paragraphStyle, color: '#FFFFFF' }}>
-          • High-quality seeds, fertilizers, and pesticides.<br />
-        </p>
-        
-        <p style={{ ...paragraphStyle, color: '#FFD700' }}>
-          • Partnerships with leading companies.<br />
-          • Committed to community needs.<br />
-          • Enhancing productivity and sustainability.
-        </p>
-        
-        <p style={{ ...paragraphStyle, color: '#FFD700' }}>
-          • Tradition meets innovation for a thriving future.
-        </p>
-      </div>
+    <section
+      id="about-us"
+      style={sectionStyle}
+      className="animate__animated animate__fadeInLeft"
+    >
+      <h2
+        style={{
+          ...headingStyle,
+          color: "#ffffff",
+        }}
+        className="animate__animated animate__fadeInLeft"
+      >
+        Who Are We?
+      </h2>
+      <div style={contentStyle}>{renderParagraphs()}</div>
     </section>
   );
 };
 
 const sectionStyle = {
-  padding: '50px',
-  backgroundImage: 'url("newbg.jpeg")', 
-  backgroundSize: 'cover',
-  color: '#fff',
-  minHeight: '100vh',
+  padding: "50px",
+  backgroundImage: 'url("images/newBg.jpg")',
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  color: "#fff",
+  minHeight: "100vh",
 };
 
 const headingStyle = {
-  fontSize: '2.5rem',
-  fontWeight: 'bold',
-  marginBottom: '20px',
-  textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
+  fontSize: "3.5rem", // Increased font size
+  fontWeight: "900", // More prominent weight
+  fontFamily: "'Playfair Display', serif", // Stylish font
+  marginBottom: "20px",
+  textShadow: "4px 4px 8px rgba(0,0,0,0.7)",
+  textAlign: "center", // Centering the header text
 };
 
 const paragraphStyle = {
-  fontSize: '1.5rem', // Increased font size for better visibility
-  lineHeight: '1.6',
-  marginBottom: '20px',
-  textShadow: '1px 1px 2px rgba(255, 255, 255, 0.7)', // White shadow effect
+  fontSize: "2.0rem", // Increased font size for more bold text
+  lineHeight: "1.5", // Adjust line height for readability
+  marginBottom: "20px",
+  textAlign: "center", // Center-aligned text
+  fontFamily: "'Roboto', sans-serif", // Stylish modern font
+  fontWeight: "700", // Bolder text weight
+  color: "#0f0f0f", // Slightly lighter color for better contrast
+};
+
+const wordStyle = {
+  display: "inline-block", // Treat each word as a block for independent styling
+  transition: "color 0.3s ease", // Smooth transition for color change
+  fontWeight: "700", // Make individual words bold
 };
 
 const contentStyle = {
-  margin: '20px 0', // Add some margin to separate the content
+  margin: "20px 0",
 };
 
 export default AboutUs;
