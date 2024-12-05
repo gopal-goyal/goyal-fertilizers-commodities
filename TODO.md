@@ -1,8 +1,10 @@
 # TO DO List
 
 ## Next Tasks
-- add products
-- fix button UI
+- [ ] Task 1: add products
+- [ ] Task 2: fix button UI
+- [✅] Task 3: Edited Hero Section(About US)
+- [✅] Task 4: Added Parallex effect to text
 
 ## How to run
 
