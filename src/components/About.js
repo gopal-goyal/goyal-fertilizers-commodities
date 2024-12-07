@@ -55,11 +55,10 @@ const AboutUs = () => {
       <h2
         style={{
           ...headingStyle,
-          color: "#ffffff",
         }}
         className="animate__animated animate__fadeInLeft"
       >
-        Who Are We?
+        About Us
       </h2>
       <div style={contentStyle}>{renderParagraphs()}</div>
     </section>
@@ -67,7 +66,7 @@ const AboutUs = () => {
 };
 
 const sectionStyle = {
-  padding: "50px",
+  padding: "40px",
   backgroundImage: 'url("images/newBg.jpg")',
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -77,18 +76,19 @@ const sectionStyle = {
 };
 
 const headingStyle = {
-  fontSize: "3.5rem", // Increased font size
+  color: "#ffffff",
+  fontSize: "3rem",
   fontWeight: "900", // More prominent weight
   fontFamily: "'Playfair Display', serif", // Stylish font
-  marginBottom: "20px",
+  marginBottom: "60px",
   textShadow: "4px 4px 8px rgba(0,0,0,0.7)",
   textAlign: "center", // Centering the header text
 };
 
 const paragraphStyle = {
-  fontSize: "2.0rem", // Increased font size for more bold text
+  fontSize: "1.4rem", // Increased font size for more bold text
   lineHeight: "1.5", // Adjust line height for readability
-  marginBottom: "20px",
+  marginBottom: "10px",
   textAlign: "center", // Center-aligned text
   fontFamily: "'Roboto', sans-serif", // Stylish modern font
   fontWeight: "700", // Bolder text weight
