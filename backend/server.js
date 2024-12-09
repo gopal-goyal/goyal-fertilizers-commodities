@@ -5,13 +5,16 @@ const ExcelJS = require("exceljs");
 const fs = require("fs");
 const path = require("path");
 const app = express();
-const PORT = 8000;
+const PORT = 5000;
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Update with the URL of your React app
-  methods: ["GET", "POST", "OPTIONS"], // Specify allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
-  optionsSuccessStatus: 200, // Set a successful response code for OPTIONS requests
+  origin: [
+    "http://localhost:3000", // Local development
+    "https://b5rd75rr-3000.inc1.devtunnels.ms", // Tunnel URL
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -21,6 +24,12 @@ const excelFilePath = path.join(__dirname, "data", "queries.xlsx");
 
 // Create a new Excel file with headers if it doesn't exist
 async function initializeExcelFile() {
+  const dataDir = path.join(__dirname, "data");
+  if (!fs.existsSync(dataDir)) {
+    // Create the 'data' directory if it doesn't exist
+    fs.mkdirSync(dataDir);
+  }
+
   if (!fs.existsSync(excelFilePath)) {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Queries");
@@ -38,32 +47,29 @@ async function initializeExcelFile() {
 }
 
 // Call the initialize function once at startup
-initializeExcelFile();
+async function startServer() {
+  try {
+    await initializeExcelFile(); // Ensure the Excel file is initialized before starting the server
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error initializing the Excel file:", error);
+  }
+}
 
+// Your existing writeDataToExcel function
 async function writeDataToExcel(data) {
   try {
-    const workbook = new ExcelJS.Workbook(); // initialising workbook object
-
-    console.log(`Loading workbook... ${workbook}`);
-
-    // Printing excel file path
-    console.log(excelFilePath);
+    const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(excelFilePath);
-    console.log("Workbook loaded.");
-
     let worksheet = workbook.getWorksheet("Queries");
     if (!worksheet) {
-      console.log("Worksheet not found, creating new one.");
       worksheet = workbook.addWorksheet("Queries");
     }
-
-    console.log("Adding data:", data);
     worksheet.addRow(data);
-
-    console.log("Writing to file...");
     await workbook.xlsx.writeFile(excelFilePath);
     console.log("Data written successfully.");
-    // return true;
   } catch (error) {
     console.error("Error saving query:", error);
     throw error;
@@ -72,11 +78,8 @@ async function writeDataToExcel(data) {
 
 app.post("/api/submit-query", async (req, res) => {
   const { firstName, lastName, email, mobile, message } = req.body;
-  console.log("Received data:", req.body);
-  data = [firstName, lastName, email, mobile, message];
-  console.log(data);
+  const data = [firstName, lastName, email, mobile, message];
   try {
-    console.log(req.body);
     await writeDataToExcel(data);
     res.status(200).json({ message: "Query saved successfully to Excel" });
   } catch (error) {
@@ -84,11 +87,8 @@ app.post("/api/submit-query", async (req, res) => {
   }
 });
 
-initializeExcelFile().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-});
+// Start the server after the Excel file is initialized
+startServer();
 
 // async function writeDataToExcel(data) {
 //   try {

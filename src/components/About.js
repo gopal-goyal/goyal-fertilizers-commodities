@@ -67,12 +67,10 @@ const AboutUs = () => {
 
 const sectionStyle = {
   padding: "40px",
-  backgroundImage: 'url("images/newBg.jpg")',
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundColor: "#FBAB7E",
+  backgroundImage: "linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)",
   color: "#fff",
-  minHeight: "100vh",
+  // minHeight: "100vh",
 };
 
 const headingStyle = {

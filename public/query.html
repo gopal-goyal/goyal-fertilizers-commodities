@@ -37,7 +37,7 @@
         </div>
 
         <div class="contactForm">
-          <h2>Send a Message</h2>
+          <h2>Contact Us</h2>
           <div class="formBox">
             <div class="inputBox w50">
               <input type="text" id="firstName" name="firstName" required />
@@ -60,9 +60,13 @@
               <span>Write your query here...</span>
             </div>
             <div class="inputBox w100">
-              <button type="button" onclick="submitQuery()">
-                <span class="left-text">SE</span
-                ><span class="right-text">ND</span>
+              <button type="button" id="submitBtn" onclick="submitQuery()">
+                <p id="btnText">Submit</p>
+                <div class="check-box">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                    <path fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                  </svg>
+                </div>
               </button>
             </div>
           </div>
@@ -80,7 +84,7 @@
 
         try {
           const response = await fetch(
-            "http://localhost:8000/api/submit-query",
+            "http://localhost:5000/api/submit-query",
             {
               method: "POST",
               headers: {
@@ -102,8 +106,21 @@
             throw new Error(`HTTP error! status: ${response.status}`);
           }
 
-          const data = await response.json();
-          alert(data.message);
+          // Change the button text and apply the 'active' class
+          const btn = document.querySelector("#submitBtn"); // Target the button by ID
+          const btnText = document.querySelector("#btnText");
+
+          if (btn && btnText) {
+            // Change the button text to "Thanks" and apply the 'active' class
+            btnText.innerHTML = "Thanks";
+            btn.classList.add("active");
+
+            // Reset the button text and remove the 'active' class after 3 seconds
+            setTimeout(() => {
+              btnText.innerHTML = "Submit"; // Revert the text to "Submit"
+              btn.classList.remove("active"); // Remove the 'active' class
+            }, 4000);
+          }
         } catch (error) {
           console.error("Error in fetch request:", error);
           alert("There was a problem submitting your query.");

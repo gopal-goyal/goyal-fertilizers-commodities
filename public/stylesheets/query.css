@@ -37,7 +37,7 @@ section::before {
   top: 0;
   left: 0;
   width: 50%;
-  height: 100%;
+  height: 100vh;
   background: #fff38e;
 }
 
@@ -64,8 +64,8 @@ section::before {
 
 .container .contactForm h2 {
   color: #0f3959;
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -127,45 +127,95 @@ section::before {
   color: #095a55;
 }
 
-/* Styling the send button */
-.container .contactForm .formBox .inputBox button {
-  width: 100%;
-  padding: 15px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(to right, #095a55 50%, #fff38e 50%);
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
+/* Submit Button */
+
+/* Center the button horizontally and vertically */
+.inputBox {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+/* Targeting the specific button with the ID "submitBtn" */
+#submitBtn {
+  width: 150px; /* Adjust the width */
+  height: 45px; /* Adjust the height */
+  border: none;
+  outline: none;
+  background: #2f2f2f; /* Button background color */
+  color: #fff; /* White text color */
+  font-size: 18px; /* Font size for the text */
+  border-radius: 20px; /* Rounded corners */
+  text-align: center;
+  box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.4);
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-top: 10px; /* Space above the button */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.container .contactForm .formBox .inputBox button:hover {
-  background: linear-gradient(to right, #0d9480 50%, #fff38e 50%);
-  transform: scale(1.05);
+/* Active state when the button is clicked (change to pink) */
+#submitBtn.active {
+  background-color: #ff2b75;  /* Pink background color */
 }
 
-/* Centering the text horizontally and vertically */
-.container .contactForm .formBox .inputBox button span {
+/* Active state when the button is clicked (change to pink) */
+#submitBtn:active {
+  background-color: #ff2b75; /* Pink background color on click */
+  transform: translateY(2px); /* Button press effect when clicked */
+}
+
+/* Target the text inside the button */
+#submitBtn #btnText {
+  transition: all 0.8s ease; /* Smooth transition for the text */
+}
+
+/* Target the check-box (icon) inside the button */
+#submitBtn .check-box {
+  width: 40px; /* Width of the check-box */
+  height: 40px; /* Height of the check-box */
+  border-radius: 20px; /* Circular shape for the check-box */
+  box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  font-weight: bold;
+  top: 0;
+  right: -20px; /* Position of the check-box */
+  opacity: 0; /* Initially hidden */
 }
 
-.container .contactForm .formBox .inputBox button .left-text {
-  left: 42%;  /* Adjust this value to move 'SE' towards the center of the left half */
-  color: white;
+/* Styling the check-box icon */
+#submitBtn .check-box svg {
+  width: 20px;
+  margin: 10px;
 }
 
-.container .contactForm .formBox .inputBox button .right-text {
-  right: 50%;  /* Adjust this value to move 'ND' towards the center of the right half */
-  color: black;
+#submitBtn svg path {
+  stroke-width: 2;
+  stroke: #fff; /* White color for the check-mark */
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  stroke-linecap: round;
+}
+
+/* Active state for the check-box */
+#submitBtn.active .check-box {
+  right: 0;
+  opacity: 1;
+  transition: 1s; /* Smooth transition */
+}
+
+/* Active state for the SVG check-mark path */
+#submitBtn.active svg path {
+  stroke-dashoffset: 0;
+  transition: 1s;
+  transition-delay: 1s;
+}
+
+/* Active state for button text */
+#submitBtn.active #btnText {
+  margin-right: 62.5px;
+  transition: 1s;
 }
 
 /* Responsive Adjustments */

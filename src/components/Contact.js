@@ -5,8 +5,7 @@ import {
   FaMapMarkerAlt,
   FaInstagram,
 } from "react-icons/fa";
-import "animate.css";
-import "./ContactUs.css";
+// import "animate.css";
 
 const ContactUs = () => {
   const handleQueryClick = () => {
@@ -21,14 +20,13 @@ const ContactUs = () => {
     >
       <h2 style={headingStyle}>Contact Us</h2>
       <p style={paragraphStyle}>
-        We would love to hear from you! Whether you have questions about our
-        products, need assistance with your order, or just want to learn more
-        about Goyal Fertilizers and Commodities, feel free to reach out to us
-        through any of the following methods:
+        We would love to hear from you! Whether you have questions, need
+        assistance, or want to learn more about Goyal Fertilizers, feel free to
+        contact us using the methods below:
       </p>
 
       <div style={sectionStyle}>
-        <div className="contact-item" style={contactItemStyle}>
+        <div style={styles.contactItem}>
           <FaMapMarkerAlt
             className="animate__animated animate__fadeInLeft"
             style={iconStyle}
@@ -39,7 +37,7 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div className="contact-item" style={contactItemStyle}>
+        <div style={styles.contactItem}>
           <FaPhone
             className="animate__animated animate__bounceIn"
             style={iconStyle}
@@ -49,7 +47,7 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div className="contact-item" style={contactItemStyle}>
+        <div style={styles.contactItem}>
           <FaEnvelope
             className="animate__animated animate__fadeInUp"
             style={iconStyle}
@@ -59,7 +57,7 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div className="contact-item" style={contactItemStyle}>
+        <div style={styles.contactItem}>
           <FaInstagram
             className="animate__animated animate__zoomIn"
             style={iconStyle}
@@ -70,7 +68,7 @@ const ContactUs = () => {
         </div>
 
         {/* Add link wrapping QR code */}
-        <div className="qr-code">
+        <div style={styles.qrCode}>
           <a
             href="https://www.instagram.com/gfc_goyal"
             target="_blank"
@@ -99,13 +97,11 @@ const contactDetailsStyle = {
   padding: "1em",
   color: "white",
   lineHeight: "1.8",
-  // marginTop: "20px",
   height: "auto",
   display: "flex",
   flexDirection: "column",
   alignContent: "center",
   justifyContent: "center",
-  // border: "2px solid #fff",
   backgroundColor: "#1f1f1f",
   overflow: "auto",
 };
@@ -118,11 +114,6 @@ const sectionStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "15px",
-};
-
-const contactItemStyle = {
-  display: "flex",
-  alignItems: "center",
 };
 
 const iconStyle = {
@@ -167,6 +158,18 @@ const queryButtonStyle = {
   fontWeight: "bold",
   transition: "background-color 0.3s ease",
   cursor: "pointer",
+};
+
+const styles = {
+  contactItem: {
+    display: "flex",
+    marginBottom: "1em",
+  },
+  qrCode: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "1em",
+  },
 };
 
 export default ContactUs;

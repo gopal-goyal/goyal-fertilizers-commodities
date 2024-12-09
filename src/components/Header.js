@@ -23,11 +23,17 @@ const Header = () => {
           >
             About Us
           </button>
-          <button
+          {/* <button
             style={buttonStyle}
             onClick={() => scrollToSection("products")}
           >
             Products
+          </button> */}
+          <button
+            style={buttonStyle}
+            onClick={() => scrollToSection("partners")}
+          >
+            Partners
           </button>
           <button
             style={buttonStyle}
@@ -70,13 +76,13 @@ const logoStyle = {
 };
 
 const brandTextStyle = {
-  fontFamily: "'Baloo 2', cursive",
+  fontFamily: "Helvetica, sans-serif",
   fontSize: "2.0rem",
   lineHeight: "1.6",
-  fontWeight: "1000",
+  fontWeight: "1200",
   color: "#4CAF50",
   marginTop: "10px",
-  marginBottom:"5px",
+  marginBottom: "5px",
   textAlign: "center",
 };
 
