@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Top Secret';
-  src: url('./fonts/Top Secret.woff') format('woff'); /* Adjust the path as necessary */
+  font-family: "Top Secret";
+  src: url("./fonts/Top Secret.woff") format("woff"); /* Adjust the path as necessary */
   font-weight: normal;
   font-style: normal;
 }
@@ -44,4 +44,26 @@
   }
 }
 
+.message-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #003366; /* Dark blue background */
+  color: white;
+  padding: 15px;
+  border-radius: 50%; /* Circular shape */
+  border: 3px solid #003366; /* Dark blue border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
 
+.message-icon:hover {
+  background-color: #002244; /* Darker blue on hover */
+  border-color: #002244; /* Darker blue border on hover */
+  transform: scale(1.1); /* Slightly larger on hover */
+}
+
+.message-icon i {
+  color: white;
+}
