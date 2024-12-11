@@ -15,7 +15,7 @@ const AboutUs = () => {
               Math.max(rect.top / window.innerHeight, 0),
               1
             );
-            const color = progress > 0.55 ? "#ffffff" : "#000000";
+            const color = progress > 0.55 ? "#000000" : "#ffffff";
             word.style.color = color;
           }
         }
@@ -67,8 +67,8 @@ const AboutUs = () => {
 
 const sectionStyle = {
   padding: "40px",
-  backgroundColor: "#FBAB7E",
-  backgroundImage: "linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)",
+  backgroundColor: "#1f1f1f",
+  // backgroundImage: "linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)",
   color: "#fff",
   // minHeight: "100vh",
 };

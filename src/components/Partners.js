@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Partners = () => {
   const partners = [
@@ -9,6 +9,9 @@ const Partners = () => {
     { name: "Adama", logo: "/images/Partners/Adama.png" },
     { name: "Reliance", logo: "/images/Partners/Reliance.png" },
   ];
+
+  const [selectedPartner, setSelectedPartner] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const styles = {
     container: {
@@ -31,11 +34,13 @@ const Partners = () => {
       justifyContent: "space-between",
       alignItems: "center",
       padding: "8px",
-      paddingTop: "15px", // Adjusted padding between the card top and image
+      paddingTop: "15px",
       border: "1px solid #ddd",
       borderRadius: "8px",
       height: "180px",
       transition: "transform 0.3s ease",
+      cursor: "pointer",
+      outline: "none",
     },
     cardHover: {
       transform: "scale(1.05)",
@@ -45,12 +50,55 @@ const Partners = () => {
       width: "100px",
       height: "100px",
       objectFit: "contain",
-      marginBottom: "2px", // Decreased margin further to reduce space between image and name
+      marginBottom: "2px",
     },
     name: {
       fontSize: "0.9rem",
       fontWeight: "bold",
     },
+    modalOverlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      display: isVisible ? "flex" : "none",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+      opacity: isVisible ? 1 : 0,
+      transition: "opacity 0.3s ease",
+    },
+    modal: {
+      backgroundColor: "#fff",
+      borderRadius: "10px",
+      padding: "20px",
+      width: "300px",
+      textAlign: "center",
+      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)",
+      transform: isVisible ? "scale(1)" : "scale(0.9)",
+      transition: "transform 0.3s ease",
+    },
+    closeButton: {
+      marginTop: "10px",
+      padding: "8px 12px",
+      border: "none",
+      backgroundColor: "#007BFF",
+      color: "#fff",
+      borderRadius: "5px",
+      cursor: "pointer",
+    },
+  };
+
+  const handleCardClick = (partnerName) => {
+    setSelectedPartner(partnerName);
+    setIsVisible(true); // Trigger the transition
+  };
+
+  const closeModal = () => {
+    setIsVisible(false); // Start the transition
+    setTimeout(() => setSelectedPartner(null), 300); // Wait for transition to complete before unmounting
   };
 
   return (
@@ -61,6 +109,7 @@ const Partners = () => {
           <div
             key={index}
             style={styles.card}
+            onClick={() => handleCardClick(partner.name)}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "scale(1.05)";
               e.currentTarget.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
@@ -79,6 +128,20 @@ const Partners = () => {
           </div>
         ))}
       </div>
+      {selectedPartner && (
+        <div style={styles.modalOverlay}>
+          <div style={styles.modal}>
+            <h2>{selectedPartner}</h2>
+            <p>
+              Thank you for your interest in {selectedPartner}. More features
+              are coming soon!
+            </p>
+            <button style={styles.closeButton} onClick={closeModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
