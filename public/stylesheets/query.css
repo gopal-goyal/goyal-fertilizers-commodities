@@ -158,7 +158,7 @@ section::before {
 
 /* Active state when the button is clicked (change to pink) */
 #submitBtn.active {
-  background-color: #ff2b75;  /* Pink background color */
+  background-color: #ff2b75; /* Pink background color */
 }
 
 /* Active state when the button is clicked (change to pink) */
@@ -240,4 +240,21 @@ section::before {
   .container .contactForm .formBox .inputBox.w50 {
     width: 100%;
   }
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
 }

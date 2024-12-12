@@ -74,13 +74,37 @@
       </div>
     </section>
 
+    <div class="popup" id="popupMessage">
+      Please fill all the required fields!
+    </div>
+
     <script>
       async function submitQuery() {
-        const firstName = document.getElementById("firstName").value;
-        const lastName = document.getElementById("lastName").value;
-        const email = document.getElementById("email").value;
-        const mobile = document.getElementById("mobile").value;
-        const message = document.getElementById("message").value;
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const email = document.getElementById("email");
+        const mobile = document.getElementById("mobile");
+        const message = document.getElementById("message");
+
+        const popup = document.getElementById("popupMessage");
+
+        // Check if all fields are filled
+        if (
+          !firstName.value.trim() ||
+          !lastName.value.trim() ||
+          !email.value.trim() ||
+          !mobile.value.trim() ||
+          !message.value.trim()
+        ) {
+          popup.style.display = "block";
+
+          // Hide the popup after 3 seconds
+          setTimeout(() => {
+            popup.style.display = "none";
+          }, 3000);
+
+          return;
+        }
 
         try {
           const response = await fetch(
@@ -91,34 +115,39 @@
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                firstName,
-                lastName,
-                email,
-                mobile,
-                message,
+                firstName: firstName.value.trim(),
+                lastName: lastName.value.trim(),
+                email: email.value.trim(),
+                mobile: mobile.value.trim(),
+                message: message.value.trim(),
               }),
             }
           );
-
-          console.log(response);
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
 
-          // Change the button text and apply the 'active' class
-          const btn = document.querySelector("#submitBtn"); // Target the button by ID
+          const btn = document.querySelector("#submitBtn");
           const btnText = document.querySelector("#btnText");
 
           if (btn && btnText) {
-            // Change the button text to "Thanks" and apply the 'active' class
             btnText.innerHTML = "Thanks";
             btn.classList.add("active");
 
-            // Reset the button text and remove the 'active' class after 3 seconds
+            // Reset the button and clear fields after a delay
             setTimeout(() => {
-              btnText.innerHTML = "Submit"; // Revert the text to "Submit"
-              btn.classList.remove("active"); // Remove the 'active' class
+              btnText.innerHTML = "Submit";
+              btn.classList.remove("active");
+
+              // Clear fields after an additional delay of 1.5 seconds
+              setTimeout(() => {
+                firstName.value = "";
+                lastName.value = "";
+                email.value = "";
+                mobile.value = "";
+                message.value = "";
+              }, 1500);
             }, 4000);
           }
         } catch (error) {
